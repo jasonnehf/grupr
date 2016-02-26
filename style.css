@@ -13,9 +13,9 @@
 }
 
 .group ul{
-	margin:0px;
 	padding:0px 0.25em;
 	text-align:middle;
+	display:inline-block;
 }
 
 .item-name,
@@ -53,4 +53,13 @@ li::before
 	border-radius: 7px 7px 7px 7px;
 	-moz-border-radius: 7px 7px 7px 7px;
 	-webkit-border-radius: 7px 7px 7px 7px;
+}
+
+.group-footer{
+	bottom:0;
+}
+
+.group
+{
+	position:relative;
 }

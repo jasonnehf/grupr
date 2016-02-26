@@ -1,46 +1,38 @@
 'use strict';
 
+var $entrynameinput;
+var $entryvalueinput;
 $(document).ready(init);
 
-var jasondebug=false;
 function init(event) {
-	
-
-	console.log("ready!");
+	$entrynameinput=$("#entry-name");
+	$entryvalueinput=$("#entry-value");
+	// console.log("ready!");
 	$("#entry-button").on('click', addItemToMain);
-	$(".group-container").on('click', '.list-item, .group', itemClicked);		// 2nd arg in .on(): deferred event handling
-	$(".group-container").on('dblclick', '.list-item', itemDblClicked);		// 2nd arg in .on(): deferred event handling
-	// if(jasondebug)	$("input").on('focus', function() {$(this).select()});
-	// if(jasondebug)	$("input").on('mouseup', function() {$(this).select()});
-	// $("#entry-name").select();
-	// $("#entry-key").select();
-	// $("#entry-value").select();
+	$(".group-container").on('click', '.list-item, .group', itemClicked);		
+	$(".group-container").on('dblclick', '.list-item', itemDblClicked);	
+	
+	updateGroupTotals();
 }
-// if(jasondebug)	var entryvaluecounter=0;
+
 function addItemToMain(event)
 {
 	var $this=$(this);
-	var entryname=$("#entry-name").val();
-	// if(jasondebug)	entryname=entryname+entryvaluecounter;	
-	// var entrykey=$("#entry-key").val();
-	var entryvalue=parseInt($("#entry-value").val(),10);
+	var entryname=$entrynameinput.val();
+	var entryvalue=parseInt($entryvalueinput.val(),10);
 	
 	if(!entryname || !entryvalue)	return;
 
-	// if(jasondebug)	entryvalue+=entryvaluecounter++;
-	// console.log({name: entryname,key:entrykey,value:entryvalue});
-
-	var $entryname=$('<div>').text(entryname).addClass("item-name");
-	// var $entrykey=$('<div>').text(entrykey).addClass("item-key");
-	var $entryvalue=$('<div>').text(getDuration(entryvalue)).addClass("item-value");
+	var $itemname=$('<div>').text(entryname).addClass("item-name");
+	var $itemvalue=$('<div>').text(getDuration(entryvalue)).addClass("item-value");
 
 	var $li=$("<li>").addClass("list-item");
 	$li.data("value", entryvalue);
-	$li.append($entryname).append($entryvalue);
+	$li.append($itemname).append($itemvalue);
 	$("#grouplist0").append($li);
 	$('li.clicked').removeClass("clicked");
-	$("#entry-name").val("");
-	$("#entry-value").val("");
+	$entrynameinput.val("");
+	$entryvalueinput.val("");
 	updateGroupTotals();
 }
 
@@ -89,13 +81,14 @@ function updateGroupTotals(which=[0,1,2,3])
 	var whichIds=which.map(function(i){return "#group"+i;});
 	for(var x=0; x<whichIds.length;x++)
 	{
-		var $allGroupLI=$(whichIds[x]+" li");
-		var allLiData=$allGroupLI.map(function(i) { return $(this).data().value}).get();
+		var $allGroup=$(whichIds[x]);
+		var $allGroupLI=$allGroup.find('li');
+		var allLiData=$allGroupLI.map(function(i) { return $(this).data().value;}).get();
 		var sumAllLiData=(allLiData.length ? allLiData.reduce((p,c)=>p+c) : 0);
 		// console.log("sumAllLiData: ", sumAllLiData);
 		// console.log("allLiData: ", allLiData);
 		var duration=getDuration(sumAllLiData);
-		$(whichIds[x]+" .group-footer").text(`Duration: ${duration}`)
+		$allGroup.find(".group-footer").append('<div>').addClass('total').text(`Duration: ${duration}`);
 		
 	}
 }
