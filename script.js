@@ -9,6 +9,7 @@ function init(event) {
 	console.log("ready!");
 	$("#entry-button").on('click', addItemToMain);
 	$(".group-container").on('click', '.list-item, .group', itemClicked);		// 2nd arg in .on(): deferred event handling
+	$(".group-container").on('dblclick', '.list-item', itemDblClicked);		// 2nd arg in .on(): deferred event handling
 	// if(jasondebug)	$("input").on('focus', function() {$(this).select()});
 	// if(jasondebug)	$("input").on('mouseup', function() {$(this).select()});
 	// $("#entry-name").select();
@@ -24,6 +25,8 @@ function addItemToMain(event)
 	// var entrykey=$("#entry-key").val();
 	var entryvalue=parseInt($("#entry-value").val(),10);
 	
+	if(!entryname || !entryvalue)	return;
+
 	// if(jasondebug)	entryvalue+=entryvaluecounter++;
 	// console.log({name: entryname,key:entrykey,value:entryvalue});
 
@@ -95,4 +98,11 @@ function updateGroupTotals(which=[0,1,2,3])
 		$(whichIds[x]+" .group-footer").text(`Duration: ${duration}`)
 		
 	}
+}
+
+function itemDblClicked(event)
+{
+	var $this=$(this);
+	$this.remove();
+	updateGroupTotals();
 }
