@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>grupr - a grouper</title>
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header-container">
+			<div class="header">Mixtapr</div>
+		</div>
+		<div class="main-container">
+			<div class="entry-container">
+				<div class="entry-header">
+					Enter a Song!
+				</div>
+				<div class="entry">
+					<label class="entry-label">Song Name</label><input type="text" id="entry-name" value="Song #1" />
+					<label class="entry-label">Track Length (s)</label><input type="number" id="entry-value" value="300" />
+					<button id="entry-button">Add Item</button>
+				</div>
+			</div>
+			<div class="group-container">
+				<div id="group0" class="group">
+					<div class="group-header">Song Library</div>
+					<ul id="grouplist0" class="grouplist"></ul>
+					<div class="group-footer"></div>
+				</div>
+				<div id="group1" class="group">
+					<div class="group-header">Mixtape : "Pump Me Up!"</div>
+					<ul id="grouplist1" class="grouplist"></ul>
+					<div class="group-footer"></div>
+				</div>
+				<div id="group2" class="group">
+					<div class="group-header">Mixtape : "Chill Me Out!"</div>
+					<ul id="grouplist2" class="grouplist"></ul>
+					<div class="group-footer"></div>
+				</div>
+				<div id="group3" class="group">
+					<div class="group-header">Mixtape : "Block Out The World!"</div>
+					<ul id="grouplist3" class="grouplist"></ul>
+					<div class="group-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>
